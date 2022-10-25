@@ -22,7 +22,7 @@ public class SideCamera : MonoBehaviour
     .Append(this.transform.DORotate(new Vector3(-12f, this._startAngle, 0f), 0f))
     .Append(this.transform.DORotate(new Vector3(-12f, this._endAngle, 0f), duration))
     .SetDelay(delay)
-    .SetEase(Ease.Linear);
+    .SetEase(Ease.InOutSine);
   }
 
 }

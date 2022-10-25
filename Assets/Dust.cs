@@ -5,11 +5,11 @@ using DG.Tweening;
 
 public class Dust : MonoBehaviour
 {
-  public void Float()
+  public void MoveAndDisappear(Vector3 to)
   {
     DOTween.Sequence()
     .Append(
-        this.transform.DOLocalMoveY(Random.Range(0f, 1f), 1f).SetEase(Ease.OutExpo)
+        this.transform.DOLocalMove(to, 1f).SetEase(Ease.OutExpo)
     ).Join(
         this.transform.DOScale(Vector3.zero, 1f).SetEase(Ease.OutExpo)
     ).Join(

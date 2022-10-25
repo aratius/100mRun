@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour
   private CubeHuman[] _players;
   [SerializeField]
   private SideCamera _sideCamera;
+  [SerializeField]
+  private SlideCamera _slideCamera;
 
   void Start()
   {
@@ -17,7 +19,16 @@ public class GameController : MonoBehaviour
 
   void Update()
   {
+    if (Input.GetKeyDown(KeyCode.I)) this.StartIntroduction();
     if (Input.GetKeyDown(KeyCode.S)) this.StartRace();
+  }
+
+  /// <summary>
+  ///
+  /// </summary>
+  public void StartIntroduction()
+  {
+    this._slideCamera.Slide(10f, 0f);
   }
 
   /// <summary>
