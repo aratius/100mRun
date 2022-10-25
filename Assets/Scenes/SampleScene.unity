@@ -1347,6 +1347,11 @@ MonoBehaviour:
     onActive:
       m_PersistentCalls:
         m_Calls: []
+  - camera: {fileID: 367915911}
+    isActive: 0
+    onActive:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &1118659933
 GameObject:
   m_ObjectHideFlags: 0
