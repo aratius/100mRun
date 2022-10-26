@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
   }
 
   /// <summary>
-  ///
+  /// player introduction
   /// </summary>
   public void StartIntroduction()
   {
