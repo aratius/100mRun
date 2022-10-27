@@ -81,8 +81,8 @@ public class CubeHuman : MonoBehaviour
     {
       // 着地砂埃
       if (
-        t.ElapsedPercentage(includeLoops: false) > .75f &&
-        t.ElapsedPercentage(includeLoops: false) < .95f &&
+        t.ElapsedPercentage(includeLoops: false) > .8f &&
+        // t.ElapsedPercentage(includeLoops: false) < .95f &&
         Random.Range(0f, 1f) < .3f
       )
       {

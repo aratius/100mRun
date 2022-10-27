@@ -42,6 +42,8 @@ public class Cameras : MonoBehaviour
 {
 
   [SerializeField]
+  private int _defaultActiveIndex;
+  [SerializeField]
   private CameraData[] _cameraData;
 
   // Start is called before the first frame update
@@ -49,6 +51,7 @@ public class Cameras : MonoBehaviour
   {
     foreach (CameraData thisCamera in this._cameraData)
     {
+      thisCamera.Off();
       thisCamera.onActive.AddListener(() =>
       {
         foreach (CameraData otherCamera in this._cameraData)
@@ -58,6 +61,7 @@ public class Cameras : MonoBehaviour
         }
       });
     }
+    this._cameraData[this._defaultActiveIndex].On();
   }
 
   // Update is called once per frame
