@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+/// <summary>
+/// Pole
+/// </summary>
 public class Pole : MonoBehaviour
 {
-    /// <summary>
-    ///
-    ///
-    /// </summary>
-    public void Build()
-    {
 
+    /// <summary>
+    /// build
+    /// </summary>
+    public void Build(float height)
+    {
+        this.transform.DOScaleY(height, .5f).SetEase(Ease.OutElastic);
     }
 }

@@ -2,11 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+struct PlayerCameras {
+  public GameObject side;
+  public GameObject front;
+  public GameObject diagonal;
+}
+
 public class GameController : MonoBehaviour
 {
 
   [SerializeField]
   private CubeHuman[] _players;
+  [SerializeField]
+  private PlayerCameras[] _playersCameras;
   [SerializeField]
   private SideCamera _sideCamera;
   [SerializeField]
@@ -20,7 +29,8 @@ public class GameController : MonoBehaviour
   void Update()
   {
     if (Input.GetKeyDown(KeyCode.I)) this.StartIntroduction();
-    if (Input.GetKeyDown(KeyCode.S)) this.StartRace();
+    else if (Input.GetKeyDown(KeyCode.S)) this.StartRace();
+    else if (Input.GetKeyDown(KeyCode.F)) this._playersCameras[0].front.GetComponent<FrontCamera>().Focus();
   }
 
   /// <summary>
