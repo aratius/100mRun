@@ -43,16 +43,7 @@ public class CubeHuman : MonoBehaviour
 
   private State _state = State.running;
   private float _speed = 0f;
-
-  // Start is called before the first frame update
-  void Start()
-  {
-  }
-
-  // Update is called once per frame
-  void Update()
-  {
-  }
+  private Tween _tween;
 
   /// <summary>
   ///
@@ -67,28 +58,46 @@ public class CubeHuman : MonoBehaviour
   /// </summary>
   public async void Perform()
   {
+    if(this._tween != null) this._tween.Kill();
+
     this._player.CurrentTime = this._performAnimation.startTime;
     this._state = State.peforming;
-    Tween t = DOTween.To(
+    float prevProgress = 0f;
+    this._tween = DOTween.To(
       (value) => this._player.CurrentTime = value,
       this._performAnimation.startTime,
       this._performAnimation.endTime,
       2f
-    ).SetLoops(3).SetDelay(1f).SetEase(Ease.Linear);
-    t.OnUpdate(() =>
+    )
+    .SetLoops(3)
+    .SetDelay(1f)
+    .SetEase(Ease.Linear)
+    .OnUpdate(() =>
     {
+      float progress = this._tween.ElapsedPercentage(includeLoops: false);
+
       // 着地砂埃
       if (
-        t.ElapsedPercentage(includeLoops: false) > .8f &&
-        // t.ElapsedPercentage(includeLoops: false) < .95f &&
-        Random.Range(0f, 1f) < .3f
+        progress > .8f &&
+        progress < .9f &&
+        Random.Range(0f, 1f) < .5f
       )
       {
-        float angle = Random.Range(0f, Mathf.PI * 2);
-        Vector3 offset = new Vector3(Mathf.Sin(angle), -1.5f, Mathf.Cos(angle));
-        Vector3 moveOffset = new Vector3(offset.x * 1.5f, Random.Range(.3f, 1f), offset.z * 1.5f);
-        Dusts.Instance.Create(this.transform.position + offset, moveOffset);
+        for(int i = 0; i < 3; i++)
+        {
+          float angle = Random.Range(0f, Mathf.PI * 2);
+          Vector3 offset = new Vector3(Mathf.Sin(angle), -.5f, Mathf.Cos(angle));
+          Vector3 moveOffset = new Vector3(offset.x * 1.2f, Random.Range(.2f, .5f), offset.z * 1.2f);
+          Dusts.Instance.Create(this.transform.position + offset, moveOffset);
+        }
       }
+
+      if(progress > .8f && prevProgress <= .8f)
+      {
+        foreach(WiggleCamera camera in WiggleCamera.instances) camera.Shock();
+      }
+
+      prevProgress = progress;
     });
   }
 
@@ -97,10 +106,11 @@ public class CubeHuman : MonoBehaviour
   /// </summary>
   public void Run()
   {
+    if(this._tween != null) this._tween.Kill();
     this._state = State.running;
     float totalTime = 9f;
 
-    DOTween.Sequence()
+    this._tween = DOTween.Sequence()
     .Append(
       // Prepare running
       DOTween.To(
@@ -145,7 +155,7 @@ public class CubeHuman : MonoBehaviour
             )
         ).OnUpdate(() =>
         {
-          if (Random.Range(0f, 1f) < .15f) Dusts.Instance.Create(this.transform.position + new Vector3(Random.Range(-.5f, .5f), -1f, -.5f), new Vector3(0f, Random.Range(0.3f, 1.5f), 0f));
+          if (Random.Range(0f, 1f) < .2f) Dusts.Instance.Create(this.transform.position + new Vector3(Random.Range(-.5f, .5f), -.5f, -.5f), new Vector3(0f, Random.Range(0.3f, 1.5f), 0f));
           Poles.Instance.SetProgress(this.transform.position.z / 100f);
         })
     ).Append(

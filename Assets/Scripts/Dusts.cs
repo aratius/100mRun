@@ -16,7 +16,7 @@ public class Dusts : SingletonMonoBehaviour<Dusts>
     public void Create(Vector3 position, Vector3 moveOffset)
     {
         GameObject dust = Instantiate(this._dustPrefab, this.transform);
-        float scale = Random.Range(.3f, 1f);
+        float scale = Random.Range(.1f, .5f);
         dust.transform.localScale = Vector3.one * scale;
         dust.transform.position = position;
         dust.GetComponent<Dust>().MoveAndDisappear(position + moveOffset);
