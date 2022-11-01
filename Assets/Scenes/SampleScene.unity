@@ -1215,8 +1215,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _players:
   - {fileID: 2344739563091067766}
-  _playersCameras:
-  - side: {fileID: 477254330}
+  _playerCameras:
+    side: {fileID: 477254330}
     front: {fileID: 618631123}
     diagonal: {fileID: 245175619}
   _sideCamera: {fileID: 1290645453}

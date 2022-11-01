@@ -38,7 +38,7 @@ class CameraData
 
 }
 
-public class Cameras : MonoBehaviour
+public class Cameras : SingletonMonoBehaviour<Cameras>
 {
 
   [SerializeField]
@@ -69,4 +69,14 @@ public class Cameras : MonoBehaviour
   {
     foreach (CameraData thisCamera in this._cameraData) thisCamera.Update();
   }
+
+  /// <summary>
+  ///
+  /// </summary>
+  /// <param name="index"></param>
+  public void ActivateByIndex(int index)
+  {
+    this._cameraData[index].isActive = true;
+  }
+
 }

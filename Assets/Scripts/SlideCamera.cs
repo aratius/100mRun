@@ -23,9 +23,9 @@ public class SlideCamera : MonoBehaviour
     s.Append(this.transform.DOLocalMoveX(this._startPosX, 0));
     foreach(float x in this._fixPosXs)
     {
-      s.Append(this.transform.DOLocalMoveX(x, duration / this._fixPosXs.Length)).SetEase(Ease.InOutQuad);
+      s.Append(this.transform.DOLocalMoveX(x, duration / this._fixPosXs.Length).SetEase(Ease.InOutQuart));
     }
-    s.Append(this.transform.DOLocalMoveX(this._endPosX, duration / this._fixPosXs.Length)).SetEase(Ease.InOutQuad);
+    s.Append(this.transform.DOLocalMoveX(this._endPosX, duration / this._fixPosXs.Length).SetEase(Ease.InOutQuart));
     s.SetDelay(delay);
     s.SetEase(Ease.Linear);
   }
