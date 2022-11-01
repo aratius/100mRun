@@ -68,48 +68,37 @@ public class GameController : MonoBehaviour
     this.StartIntroduction();
 
     Cameras.Instance.ActivateByIndex(3);
-
     await UniTask.Delay(12000);
 
     Cameras.Instance.ActivateByIndex(0);
-
     await UniTask.Delay(3000);
 
     Cameras.Instance.ActivateByIndex(6);
     this._playerCameras.front.GetComponent<FrontCamera>().Focus();
-
     await UniTask.Delay(5000);
 
     Cameras.Instance.ActivateByIndex(1);
-
     await UniTask.Delay(1000);
 
     this.StartRace();
-
     await UniTask.Delay(2500);
 
     Cameras.Instance.ActivateByIndex(5);
-
     await UniTask.Delay(1000);
 
     Cameras.Instance.ActivateByIndex(4);
-
     await UniTask.Delay(2000);
 
     Cameras.Instance.ActivateByIndex(5);
-
     await UniTask.Delay(3000);
 
     Cameras.Instance.ActivateByIndex(2);
-
     await UniTask.Delay(2000);
 
     Cameras.Instance.ActivateByIndex(4);
-
     await UniTask.Delay(5000);
 
     Cameras.Instance.ActivateByIndex(5);
-
     await UniTask.Delay(500);
 
     Cameras.Instance.ActivateByIndex(4);
