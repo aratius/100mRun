@@ -155,7 +155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367915911}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 1, y: 0.5, z: 4}
+  m_LocalPosition: {x: 1.96, y: 0.5, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -176,6 +176,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startPosX: 10
   _endPosX: -10
+  _fixPosXs:
+  - 2
+  - -2
 --- !u!81 &367915914
 AudioListener:
   m_ObjectHideFlags: 0
@@ -240,7 +243,7 @@ GameObject:
   - component: {fileID: 433607191}
   - component: {fileID: 433607190}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: Lane2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -342,7 +345,7 @@ GameObject:
   - component: {fileID: 539275440}
   - component: {fileID: 539275439}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Lane1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6449,7 +6452,7 @@ GameObject:
   - component: {fileID: 1823612282}
   - component: {fileID: 1823612281}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6546,7 +6549,7 @@ GameObject:
   - component: {fileID: 1867327402}
   - component: {fileID: 1867327401}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: Lane3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

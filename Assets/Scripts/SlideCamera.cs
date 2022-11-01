@@ -9,6 +9,8 @@ public class SlideCamera : MonoBehaviour
   private float _startPosX;
   [SerializeField]
   private float _endPosX;
+  [SerializeField]
+  private float[] _fixPosXs;
 
   /// <summary>
   ///
@@ -17,10 +19,14 @@ public class SlideCamera : MonoBehaviour
   /// <param name="delay"></param>
   public void Slide(float duration, float delay)
   {
-    DOTween.Sequence()
-    .Append(this.transform.DOLocalMoveX(this._startPosX, 0))
-    .Append(this.transform.DOLocalMoveX(this._endPosX, duration))
-    .SetDelay(delay)
-    .SetEase(Ease.Linear);
+    Sequence s = DOTween.Sequence();
+    s.Append(this.transform.DOLocalMoveX(this._startPosX, 0));
+    foreach(float x in this._fixPosXs)
+    {
+      s.Append(this.transform.DOLocalMoveX(x, duration / this._fixPosXs.Length)).SetEase(Ease.InOutQuad);
+    }
+    s.Append(this.transform.DOLocalMoveX(this._endPosX, duration / this._fixPosXs.Length)).SetEase(Ease.InOutQuad);
+    s.SetDelay(delay);
+    s.SetEase(Ease.Linear);
   }
 }
