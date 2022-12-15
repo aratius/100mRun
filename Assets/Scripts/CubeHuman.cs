@@ -58,7 +58,7 @@ public class CubeHuman : MonoBehaviour
   /// </summary>
   public async void Perform()
   {
-    if(this._tween != null) this._tween.Kill();
+    if (this._tween != null) this._tween.Kill();
 
     this._player.CurrentTime = this._performAnimation.startTime;
     this._state = State.peforming;
@@ -83,7 +83,7 @@ public class CubeHuman : MonoBehaviour
         Random.Range(0f, 1f) < .5f
       )
       {
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
           float angle = Random.Range(0f, Mathf.PI * 2);
           Vector3 offset = new Vector3(Mathf.Sin(angle), -.5f, Mathf.Cos(angle));
@@ -92,9 +92,9 @@ public class CubeHuman : MonoBehaviour
         }
       }
 
-      if(progress > .8f && prevProgress <= .8f)
+      if (progress > .8f && prevProgress <= .8f)
       {
-        foreach(WiggleCamera camera in WiggleCamera.instances) camera.Shock();
+        foreach (WiggleCamera camera in WiggleCamera.instances) camera.Shock();
       }
 
       prevProgress = progress;
@@ -106,7 +106,7 @@ public class CubeHuman : MonoBehaviour
   /// </summary>
   public void Run()
   {
-    if(this._tween != null) this._tween.Kill();
+    if (this._tween != null) this._tween.Kill();
     this._state = State.running;
     float totalTime = 9f;
 
@@ -156,7 +156,7 @@ public class CubeHuman : MonoBehaviour
         ).OnUpdate(() =>
         {
           if (Random.Range(0f, 1f) < .2f) Dusts.Instance.Create(this.transform.position + new Vector3(Random.Range(-.5f, .5f), -.5f, -.5f), new Vector3(0f, Random.Range(0.3f, 1.5f), 0f));
-          Poles.Instance.SetProgress(this.transform.position.z / 100f);
+          LavaGenerator.Instance.Release(this.transform.position.z);
         })
     ).Append(
       // End running
