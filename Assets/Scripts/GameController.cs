@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
 
 [System.Serializable]
@@ -33,6 +34,7 @@ public class GameController : MonoBehaviour
     else if (Input.GetKeyDown(KeyCode.I)) this.StartIntroduction();
     else if (Input.GetKeyDown(KeyCode.R)) this.StartRace();
     else if (Input.GetKeyDown(KeyCode.F)) this._playerCameras.front.GetComponent<FrontCamera>().Focus();
+    else if (Input.GetKeyDown(KeyCode.L)) SceneManager.LoadScene (SceneManager.GetActiveScene().name);
   }
 
   /// <summary>
@@ -40,7 +42,7 @@ public class GameController : MonoBehaviour
   /// </summary>
   public void StartIntroduction()
   {
-    this._slideCamera.Slide(10f, 0f);
+    this._slideCamera.Slide(3f, 0f);
   }
 
   /// <summary>
@@ -68,14 +70,14 @@ public class GameController : MonoBehaviour
     this.StartIntroduction();
 
     Cameras.Instance.ActivateByIndex(3);
-    await UniTask.Delay(12000);
+    await UniTask.Delay(4500);
 
     Cameras.Instance.ActivateByIndex(0);
-    await UniTask.Delay(3000);
+    await UniTask.Delay(2000);
 
     Cameras.Instance.ActivateByIndex(6);
     this._playerCameras.front.GetComponent<FrontCamera>().Focus();
-    await UniTask.Delay(5000);
+    await UniTask.Delay(3500);
 
     Cameras.Instance.ActivateByIndex(1);
     await UniTask.Delay(1000);
@@ -86,7 +88,7 @@ public class GameController : MonoBehaviour
     Cameras.Instance.ActivateByIndex(5);
     await UniTask.Delay(1000);
 
-    Cameras.Instance.ActivateByIndex(4);
+    Cameras.Instance.ActivateByIndex(7);
     await UniTask.Delay(2000);
 
     Cameras.Instance.ActivateByIndex(5);
@@ -102,6 +104,10 @@ public class GameController : MonoBehaviour
     await UniTask.Delay(500);
 
     Cameras.Instance.ActivateByIndex(4);
+
+    await UniTask.Delay(5000);
+
+    LavaGenerator.Instance.Fall(this._players[0].transform.position);
   }
 
 }

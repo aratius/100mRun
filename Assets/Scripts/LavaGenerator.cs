@@ -12,15 +12,15 @@ public class LavaGenerator : SingletonMonoBehaviour<LavaGenerator>
   // Start is called before the first frame update
   void Start()
   {
-    for (float i = 0; i < 100; i += .5f)
+    for (float i = -30; i < 100; i += 1f)
     {
       for (int j = 0; j <= 10; j++)
       {
         for (int k = 0; k < 2; k++)
         {
           float angle = ((float)j / 10f) * Mathf.PI - Mathf.PI / 2f;
-          float rad = 5f + (float)k * 10f;
-          float scale = .6f + (float)k * 1.2f;
+          float rad = 3f + (float)k * 10f;
+          float scale = .7f + (float)k * 1.5f;
           Vector3 p = new Vector3(Mathf.Sin(angle) * rad, Mathf.Cos(angle) * rad, i);
           Quaternion r = Quaternion.Euler(Random.Range(0, 360f), Random.Range(0, 360f), Random.Range(0, 360f));
           GameObject lava = Instantiate(this._lavaPrefabs[(int)Mathf.Floor(Random.Range(0, this._lavaPrefabs.Count))], p, r, this.transform);
@@ -58,4 +58,23 @@ public class LavaGenerator : SingletonMonoBehaviour<LavaGenerator>
       }
     }
   }
+
+  public void Fall(Vector3 pos)
+  {
+    for (int i = 0; i < 300; i++)
+      {
+        float scale = .5f;
+        Vector3 p = pos + Vector3.up * i * scale + Vector3.up * 10f;
+        Quaternion r = Quaternion.identity;
+        GameObject lava = Instantiate(this._lavaPrefabs[(int)Mathf.Floor(Random.Range(0, this._lavaPrefabs.Count))], p, r, this.transform);
+        lava.transform.localScale = Vector3.one * scale;
+        Rigidbody rb = lava.GetComponent<Rigidbody>();
+        if (rb.isKinematic)
+        {
+          rb.isKinematic = false;
+          rb.useGravity = true;
+        }
+      }
+  }
+
 }

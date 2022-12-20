@@ -19,6 +19,10 @@ public class WiggleCamera : MonoBehaviour
 
   [SerializeField]
   private CameraStatus _defaultStatus;
+  [SerializeField]
+  private float _strength = 1f;
+  [SerializeField]
+  private float _speed = 1f;
 
   private Vector3 _defaultLocalPosition;
   private Tween _cameraTween;
@@ -52,12 +56,12 @@ public class WiggleCamera : MonoBehaviour
     )
     .SetLoops(-1)
     .OnUpdate(() => {
-      float t = Time.time;
+      float t = Time.time * this._speed;
       float range = .001f;
       Vector3 p = this._defaultLocalPosition + new Vector3(
-        Mathf.Sin(t * .8f) + Mathf.Sin(t * .9f),
-        Mathf.Cos(t * .81f) + Mathf.Cos(t * .91f),
-        Mathf.Sin(t * .82f) + Mathf.Cos(t * .92f)
+        (Mathf.Sin(t * .8f) + Mathf.Sin(t * .9f)) * this._strength,
+        (Mathf.Sin(t * .88f) + Mathf.Cos(t * .98f)) * this._strength,
+        (Mathf.Cos(t * .84f) + Mathf.Cos(t * .94f)) * this._strength
       ) * range;
       this.transform.DOLocalMove(p, .1f);
     });
