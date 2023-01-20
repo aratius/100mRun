@@ -19,13 +19,13 @@ public class LavaGenerator : SingletonMonoBehaviour<LavaGenerator>
         for (int k = 0; k < 2; k++)
         {
           float angle = ((float)j / 10f) * Mathf.PI - Mathf.PI / 2f;
-          float rad = 3f + (float)k * 10f;
+          float rad = 3f + (float)k * 5;
           float scale = .7f + (float)k * 1.5f;
           Vector3 p = new Vector3(Mathf.Sin(angle) * rad, Mathf.Cos(angle) * rad, i);
           Quaternion r = Quaternion.Euler(Random.Range(0, 360f), Random.Range(0, 360f), Random.Range(0, 360f));
           GameObject lava = Instantiate(this._lavaPrefabs[(int)Mathf.Floor(Random.Range(0, this._lavaPrefabs.Count))], p, r, this.transform);
           lava.transform.localScale = Vector3.one * scale;
-          this._lavas.Add(lava);
+          if(k==0) this._lavas.Add(lava);
         }
       }
     }

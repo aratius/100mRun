@@ -28,11 +28,13 @@ public class GameController : MonoBehaviour
   [SerializeField]
   private PostProcessVolume _volume;
   private DepthOfField _dof;
+  private AutoExposure _autoExposure;
   private Sequence _seq;
 
   void Start()
   {
     this._dof = this._volume.profile.GetSetting<DepthOfField>();
+    this._autoExposure = this._volume.profile.GetSetting<AutoExposure>();
   }
 
   void Update()
@@ -84,10 +86,10 @@ public class GameController : MonoBehaviour
     this._ApplyDof(DofSettings.lookUp);
     await UniTask.Delay(2000);
 
-    Cameras.Instance.ActivateByIndex(6);
-    this._ApplyDof(DofSettings.focus);
-    this._playerCameras.front.GetComponent<FrontCamera>().Focus();
-    await UniTask.Delay(3500);
+    // Cameras.Instance.ActivateByIndex(6);
+    // this._ApplyDof(DofSettings.focus);
+    // this._playerCameras.front.GetComponent<FrontCamera>().Focus();
+    // await UniTask.Delay(3500);
 
     Cameras.Instance.ActivateByIndex(1);
     this._ApplyDof(DofSettings.start);
@@ -152,6 +154,12 @@ public class GameController : MonoBehaviour
         duration
       )
     );
+  }
+
+  private void _ApplyExposure(float min, float max)
+  {
+    this._autoExposure.maxLuminance.value = min;
+    this._autoExposure.minLuminance.value = max;
   }
 
 }
